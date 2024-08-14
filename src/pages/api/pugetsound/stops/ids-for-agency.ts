@@ -1,3 +1,5 @@
+// Retrieve the list of all stops for a particular agency by id.
+
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {

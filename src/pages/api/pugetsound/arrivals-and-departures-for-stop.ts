@@ -1,3 +1,4 @@
+// Get current arrivals and departures for a stop identified by id
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {

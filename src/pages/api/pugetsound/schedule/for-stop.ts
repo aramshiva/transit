@@ -1,3 +1,5 @@
+// Retrieve the full schedule for a stop on a particular day.
+
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {

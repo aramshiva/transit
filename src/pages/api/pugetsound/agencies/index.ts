@@ -1,3 +1,5 @@
+// Retrieve info for a specific transit agency identified by id
+
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {

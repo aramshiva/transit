@@ -1,3 +1,5 @@
+// Search for routes near a specific location, optionally by name
+
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {

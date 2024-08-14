@@ -1,3 +1,5 @@
+// Get access to configuration information about the OBA server.
+
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {

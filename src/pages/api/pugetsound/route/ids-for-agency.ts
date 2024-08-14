@@ -1,3 +1,5 @@
+// Retrieve the list of all route ids for a particular agency.
+
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {

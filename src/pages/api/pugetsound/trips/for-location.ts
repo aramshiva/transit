@@ -1,3 +1,5 @@
+// Search for active trips near a specific location.
+
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {

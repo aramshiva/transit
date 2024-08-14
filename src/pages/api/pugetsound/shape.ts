@@ -1,3 +1,5 @@
+// Retrieve a shape (the path traveled by a transit vehicle) by id.
+
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
