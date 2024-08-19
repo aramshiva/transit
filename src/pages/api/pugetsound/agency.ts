@@ -1,4 +1,4 @@
-// Returns a list of all transit agencies currently supported by OneBusAway along with the center of their coverage area.
+// Retrieve info for a specific transit agency identified by id
 
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -6,8 +6,9 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
+  const { id } = req.query;
   const response = await fetch(
-    `https://api.pugetsound.onebusaway.org/api/where/agencies-with-coverage.json?key=${process.env.NEXT_PUBLIC_ONEBUSAWAY_API_KEY}`,
+    `https://api.pugetsound.onebusaway.org/api/where/agency/${id}.json?key=${process.env.NEXT_PUBLIC_ONEBUSAWAY_API_KEY}`,
   );
   const agencies = await response.json();
 

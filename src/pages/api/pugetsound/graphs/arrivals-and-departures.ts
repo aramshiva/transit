@@ -5,10 +5,10 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  const { id } = req.query;
+  const { id, time, minutesAfter, minutesBefore } = req.query;
 
   const response = await fetch(
-    `https://api.pugetsound.onebusaway.org/api/where/arrivals-and-departures-for-stop/${id}.json?key=${process.env.NEXT_PUBLIC_ONEBUSAWAY_API_KEY}`,
+    `https://api.pugetsound.onebusaway.org/api/where/arrivals-and-departures-for-stop/${id}.json?key=${process.env.NEXT_PUBLIC_ONEBUSAWAY_API_KEY}&time=${time}&minutesAfter=${minutesAfter}&minutesBefore=${minutesBefore}`,
   );
 
   const arrivalsanddepartures = await response.json();
