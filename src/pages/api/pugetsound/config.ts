@@ -7,7 +7,7 @@ export default async function handler(
   res: NextApiResponse,
 ) {
   const response = await fetch(
-    `https://api.pugetsound.onebusaway.org/api/where/config.json?key=${process.env.ONEBUSAWAY_API_KEY}`,
+    `https://api.pugetsound.onebusaway.org/api/where/config.json?key=${process.env.NEXT_PUBLIC_ONEBUSAWAY_API_KEY}`,
   );
   const config = await response.json();
 

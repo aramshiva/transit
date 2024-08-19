@@ -1,13 +1,11 @@
 "use client";
 
-import { TrendingUp } from "lucide-react";
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -21,34 +19,34 @@ import {
 const fetchVehicles = async () => {
   return {
     20: await fetch(
-      "http://localhost:3000/api/pugetsound/vehicles/for-agency?id=20",
+      `https://api.pugetsound.onebusaway.org/api/where/vehicles-for-agency/20.json?key=${process.env.NEXT_PUBLIC_ONEBUSAWAY_API_KEY}`
     ).then((response) => response.json()),
     23: await fetch(
-      "http://localhost:3000/api/pugetsound/vehicles/for-agency?id=23",
+      `https://api.pugetsound.onebusaway.org/api/where/vehicles-for-agency/23.json?key=${process.env.NEXT_PUBLIC_ONEBUSAWAY_API_KEY}`
     ).then((response) => response.json()),
     3: await fetch(
-      "http://localhost:3000/api/pugetsound/vehicles/for-agency?id=3",
+      `https://api.pugetsound.onebusaway.org/api/where/vehicles-for-agency/3.json?key=${process.env.NEXT_PUBLIC_ONEBUSAWAY_API_KEY}`
     ).then((response) => response.json()),
     29: await fetch(
-      "http://localhost:3000/api/pugetsound/vehicles/for-agency?id=29",
+      `https://api.pugetsound.onebusaway.org/api/where/vehicles-for-agency/29.json?key=${process.env.NEXT_PUBLIC_ONEBUSAWAY_API_KEY}`
     ).then((response) => response.json()),
     19: await fetch(
-      "http://localhost:3000/api/pugetsound/vehicles/for-agency?id=19",
+      `https://api.pugetsound.onebusaway.org/api/where/vehicles-for-agency/19.json?key=${process.env.NEXT_PUBLIC_ONEBUSAWAY_API_KEY}`
     ).then((response) => response.json()),
     95: await fetch(
-      "http://localhost:3000/api/pugetsound/vehicles/for-agency?id=95",
+      `https://api.pugetsound.onebusaway.org/api/where/vehicles-for-agency/95.json?key=${process.env.NEXT_PUBLIC_ONEBUSAWAY_API_KEY}`
     ).then((response) => response.json()),
     40: await fetch(
-      "http://localhost:3000/api/pugetsound/vehicles/for-agency?id=40",
+      `https://api.pugetsound.onebusaway.org/api/where/vehicles-for-agency/40.json?key=${process.env.NEXT_PUBLIC_ONEBUSAWAY_API_KEY}`
     ).then((response) => response.json()),
     96: await fetch(
-      "http://localhost:3000/api/pugetsound/vehicles/for-agency?id=96",
+      `https://api.pugetsound.onebusaway.org/api/where/vehicles-for-agency/96.json?key=${process.env.NEXT_PUBLIC_ONEBUSAWAY_API_KEY}`
     ).then((response) => response.json()),
     97: await fetch(
-      "http://localhost:3000/api/pugetsound/vehicles/for-agency?id=97",
+      `https://api.pugetsound.onebusaway.org/api/where/vehicles-for-agency/97.json?key=${process.env.NEXT_PUBLIC_ONEBUSAWAY_API_KEY}`
     ).then((response) => response.json()),
     1: await fetch(
-      "http://localhost:3000/api/pugetsound/vehicles/for-agency?id=1",
+      `https://api.pugetsound.onebusaway.org/api/where/vehicles-for-agency/1.json?key=${process.env.NEXT_PUBLIC_ONEBUSAWAY_API_KEY}`
     ).then((response) => response.json()),
   };
 };

@@ -13,7 +13,7 @@ export default async function handler(
   }
 
   const response = await fetch(
-    `https://api.pugetsound.onebusaway.org/api/where/arrival-and-departure-for-stop/${id}.json?key=${process.env.ONEBUSAWAY_API_KEY}&tripId=${trip_id}&serviceDate=${service_date}`,
+    `https://api.pugetsound.onebusaway.org/api/where/arrival-and-departure-for-stop/${id}.json?key=${process.env.NEXT_PUBLIC_ONEBUSAWAY_API_KEY}&tripId=${trip_id}&serviceDate=${service_date}`,
   );
   const arrivalsanddepartures = await response.json();
 

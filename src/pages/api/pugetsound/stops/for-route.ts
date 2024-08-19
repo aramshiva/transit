@@ -16,7 +16,7 @@ export default async function handler(
 ) {
   const { id } = req.query;
   const response = await fetch(
-    `https://api.pugetsound.onebusaway.org/api/where/stops-for-route/${id}.json?key=${process.env.ONEBUSAWAY_API_KEY}`,
+    `https://api.pugetsound.onebusaway.org/api/where/stops-for-route/${id}.json?key=${process.env.NEXT_PUBLIC_ONEBUSAWAY_API_KEY}`,
   );
   const stops = await response.json();
 
