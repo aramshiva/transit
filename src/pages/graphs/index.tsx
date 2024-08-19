@@ -1,6 +1,8 @@
-import { useState, useEffect } from "react";
-import useSWR from "swr";
+"use client";
+
+import { TrendingUp } from "lucide-react";
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
+
 import {
   Card,
   CardContent,
@@ -16,106 +18,141 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 
-export default function Frequency() {
-  const [fetchedData, setFetchedData] = useState([]);
-  const id = "40_99913"; // angle lake station id
-  const time = "1723763032025";
-  const minutesBefore = 1440; // 24 hours
+const fetchVehicles = async () => {
+  return {
+    20: await fetch(
+      "http://localhost:3000/api/pugetsound/vehicles/for-agency?id=20",
+    ).then((response) => response.json()),
+    23: await fetch(
+      "http://localhost:3000/api/pugetsound/vehicles/for-agency?id=23",
+    ).then((response) => response.json()),
+    3: await fetch(
+      "http://localhost:3000/api/pugetsound/vehicles/for-agency?id=3",
+    ).then((response) => response.json()),
+    29: await fetch(
+      "http://localhost:3000/api/pugetsound/vehicles/for-agency?id=29",
+    ).then((response) => response.json()),
+    19: await fetch(
+      "http://localhost:3000/api/pugetsound/vehicles/for-agency?id=19",
+    ).then((response) => response.json()),
+    95: await fetch(
+      "http://localhost:3000/api/pugetsound/vehicles/for-agency?id=95",
+    ).then((response) => response.json()),
+    40: await fetch(
+      "http://localhost:3000/api/pugetsound/vehicles/for-agency?id=40",
+    ).then((response) => response.json()),
+    96: await fetch(
+      "http://localhost:3000/api/pugetsound/vehicles/for-agency?id=96",
+    ).then((response) => response.json()),
+    97: await fetch(
+      "http://localhost:3000/api/pugetsound/vehicles/for-agency?id=97",
+    ).then((response) => response.json()),
+    1: await fetch(
+      "http://localhost:3000/api/pugetsound/vehicles/for-agency?id=1",
+    ).then((response) => response.json()),
+  };
+};
 
-  const fetcher = (url: string) => fetch(url).then((r) => r.json());
-  const { data } = useSWR(
-    `/api/pugetsound/graphs/arrivals-and-departures?id=${id}&time=${time}&minutesAfter=0&minutesBefore=${minutesBefore}`,
-    fetcher
-  );
-
-  useEffect(() => {
-    if (
-      data &&
-      data.data &&
-      data.data.entry &&
-      data.data.entry.arrivalsAndDepartures
-    ) {
-      setFetchedData(data.data.entry.arrivalsAndDepartures);
-    }
-  }, [data]); // get data
-
-  const dataLength = fetchedData.length;
-  const arrivalsData = fetchedData.filter((item) => item.departureEnabled);
-  const arrivalsDataLength = arrivalsData.length;
-  const departuresData = fetchedData.filter((item) => item.departureEnabled);
-  const departuresDataLength = departuresData.length;
-
+const fetchVehiclesData = async () => {
+  const vehicles = await fetchVehicles();
+  // const chartData = [
+  //   { name: "Metro Transit", vehicles: vehicles[1]["data"]["list"].length },
+  //   { name: "Seattle Streetcar", vehicles: vehicles[23]["data"]["list"].length },
+  //   { name: "Pierce Transit", vehicles: vehicles[3]["data"]["list"].length },
+  //   { name: "Community Transit", vehicles: vehicles[29]["data"]["list"].length },
+  //   { name: "Intercity Transit", vehicles: vehicles[19]["data"]["list"].length },
+  //   { name: "Washington State Ferries", vehicles: vehicles[95]["data"]["list"].length },
+  //   { name: "Sound Transit", vehicles: vehicles[40]["data"]["list"].length },
+  //   { name: "Seattle Center Monorail", vehicles: vehicles[96]["data"]["list"].length },
+  //   { name: "Everett Transit", vehicles: vehicles[97]["data"]["list"].length },
+  //   { name: "Kitsap Transit", vehicles: vehicles[20]["data"]["list"].length },
+  // ];
   const chartData = [
+    { name: "Metro Transit", vehicles: vehicles[1]?.data?.list?.length ?? 0 },
     {
-      tag: "Total",
-      total: dataLength,
-      //   arrivals: arrivalsDataLength,
-      //   departures: departuresDataLength,
+      name: "Seattle Streetcar",
+      vehicles: vehicles[23]?.data?.list?.length ?? 0,
+    },
+    { name: "Pierce Transit", vehicles: vehicles[3]?.data?.list?.length ?? 0 },
+    {
+      name: "Community Transit",
+      vehicles: vehicles[29]?.data?.list?.length ?? 0,
     },
     {
-      tag: "Arrivals",
-      total: arrivalsDataLength,
-      //   arrivals: arrivalsDataLength,
-      //   departures: departuresDataLength,
+      name: "Intercity Transit",
+      vehicles: vehicles[19]?.data?.list?.length ?? 0,
     },
     {
-      tag: "Departures",
-      total: departuresDataLength,
-      //   arrivals: arrivalsDataLength,
-      //   departures: departuresDataLength,
+      name: "Washington State Ferries",
+      vehicles: vehicles[95]?.data?.list?.length ?? 0,
     },
+    { name: "Sound Transit", vehicles: vehicles[40]?.data?.list?.length ?? 0 },
+    {
+      name: "Seattle Center Monorail",
+      vehicles: vehicles[96]?.data?.list?.length ?? 0,
+    },
+    {
+      name: "Everett Transit",
+      vehicles: vehicles[97]?.data?.list?.length ?? 0,
+    },
+    { name: "Kitsap Transit", vehicles: vehicles[20]?.data?.list?.length ?? 0 },
   ];
 
-  const chartConfig = {
-    total: {
-      label: "Total",
-      color: "hsl(var(--chart-1))",
-    },
-    arrivals: {
-      label: "Arrivals",
-      color: "hsl(var(--chart-2))",
-    },
-    departures: {
-      label: "Departures",
-      color: "hsl(var(--chart-3))",
-    },
-  } satisfies ChartConfig;
+  chartData.sort((a, b) => b.vehicles - a.vehicles);
 
+  return chartData;
+};
+
+const chartData = await fetchVehiclesData();
+export { chartData };
+
+const chartConfig = {
+  vehicles: {
+    label: "Vehicles",
+    color: "hsl(var(--chart-1))",
+  },
+} satisfies ChartConfig;
+
+export default function Agencies() {
   return (
     <>
-      <Card>
-        <CardHeader>
-          <CardTitle>Arrivals and Departures</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <ChartContainer config={chartConfig}>
-            <BarChart accessibilityLayer data={chartData}>
-              <CartesianGrid vertical={false} />
-              <XAxis
-                dataKey="month"
-                tickLine={false}
-                tickMargin={10}
-                axisLine={false}
-                tickFormatter={(value) => value.slice(0, 3)}
-              />
-              <ChartTooltip
-                cursor={false}
-                content={<ChartTooltipContent indicator="dashed" />}
-              />
-              <Bar dataKey="total" fill="var(--color-total)" radius={2.6} />
-            </BarChart>
-          </ChartContainer>
-        </CardContent>
-        <CardFooter className="flex-col items-start gap-2 text-sm">
-          <div className="flex gap-2 font-medium leading-none">
-            Data Based off live data from the Angle Lake Link Station.
-          </div>
-          <div className="leading-none text-muted-foreground">
-            Showing total arrivals and departures live data for the last 24
-            hours.
-          </div>
-        </CardFooter>
-      </Card>
+      <div className="max-h-screen">
+        <Card>
+          <CardHeader>
+            <CardTitle>
+              Vehicles per Agency{" "}
+              <span className="text-red-600 font-bold">LIVE</span>
+            </CardTitle>
+            <CardDescription>
+              Amount of vehicles per each transit agency operating right now in
+              the puget sound.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ChartContainer config={chartConfig}>
+              <BarChart accessibilityLayer data={chartData}>
+                <CartesianGrid vertical={false} />
+                <XAxis
+                  dataKey="name"
+                  tickLine={false}
+                  tickMargin={20}
+                  axisLine={false}
+                  tickFormatter={(value) => value.slice(0, 20)}
+                />
+                <ChartTooltip
+                  cursor={true}
+                  content={<ChartTooltipContent hideLabel />}
+                />
+                <Bar
+                  dataKey="vehicles"
+                  fill="var(--color-vehicles)"
+                  radius={5}
+                />
+              </BarChart>
+            </ChartContainer>
+          </CardContent>
+        </Card>
+      </div>
     </>
   );
 }

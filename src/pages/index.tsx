@@ -1,11 +1,8 @@
 // pages/index.js
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const Home = () => {
-  return (
-    <>
-    </>
-  );
+  return <></>;
 };
 
 export default Home;

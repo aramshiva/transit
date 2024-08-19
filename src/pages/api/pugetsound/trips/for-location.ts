@@ -1,11 +1,16 @@
 // Search for active trips near a specific location.
 
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextApiRequest, NextApiResponse } from "next";
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-    const { id, longitude, latitude, longitudeSpan, latitudeSpan } = req.query;
-    const response = await fetch(`https://api.pugetsound.onebusaway.org/api/where/stops-for-location.json/${id}.json?key=${process.env.ONEBUSAWAY_API_KEY}&lat=${latitude}&lon=${longitude}&latSpan=${latitudeSpan}&lonSpan=${longitudeSpan}`);
-    const stops = await response.json();
-    
-    res.status(200).json(stops);
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse,
+) {
+  const { id, longitude, latitude, longitudeSpan, latitudeSpan } = req.query;
+  const response = await fetch(
+    `https://api.pugetsound.onebusaway.org/api/where/stops-for-location.json/${id}.json?key=${process.env.ONEBUSAWAY_API_KEY}&lat=${latitude}&lon=${longitude}&latSpan=${latitudeSpan}&lonSpan=${longitudeSpan}`,
+  );
+  const stops = await response.json();
+
+  res.status(200).json(stops);
 }

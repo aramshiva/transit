@@ -1,5 +1,7 @@
 # Reporting with Trip
+
 ## Acceptable Codes
+
 - `vehicle_never_came` - the vehicle never arrived
 - `vehicle_came_early` - the vehicle arrived earlier than predicted
 - `vehicle_came_late` - the vehicle arrived later than predicted
@@ -8,7 +10,9 @@
 - `other` - catch-all for everythign else
 
 ## ID
+
 `id` refers to the trip id.
 
 ## User Comment
+
 User Comment is an additional comment text supplied by the user describing the problem
